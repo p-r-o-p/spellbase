@@ -36,14 +36,6 @@ CREATE TABLE time_unit (
 );
 CREATE INDEX time_unit_name_index ON time_unit(name) USING BTREE;
 
-CREATE TABLE shape (
-  id INTEGER(32) UNSIGNED NOT NULL AUTO_INCREMENT,
-  name VARCHAR(30) NOT NULL,
-  description TEXT NOT NULL,
-  PRIMARY KEY (id)
-);
-CREATE INDEX shape_name_index ON shape(name) USING BTREE;
-
 CREATE TABLE material (
   id INTEGER(32) UNSIGNED NOT NULL AUTO_INCREMENT,
   name VARCHAR(60) NOT NULL,
@@ -102,16 +94,6 @@ CREATE TABLE spell_school (
   PRIMARY KEY (id),
   FOREIGN KEY (spell_id) REFERENCES spell(id),
   FOREIGN KEY (school_id) REFERENCES school(id)
-);
-
-CREATE TABLE spell_shape (
-  id INTEGER(32) UNSIGNED NOT NULL AUTO_INCREMENT,
-  spell_id INTEGER(32) UNSIGNED NOT NULL,
-  shape_id INTEGER(32) UNSIGNED NOT NULL,
-  size INTEGER(32) UNSIGNED NOT NULL,
-  PRIMARY KEY (id),
-  FOREIGN KEY (spell_id) REFERENCES spell(id),
-  FOREIGN KEY (shape_id) REFERENCES shape(id)
 );
 
 CREATE TABLE spell_material (

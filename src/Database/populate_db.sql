@@ -43,18 +43,6 @@ VALUES ("Action"),
 ("Minute");
 
 
--- Make certain the shape table is not polluted with old data.
-SET FOREIGN_KEY_CHECKS = 0;
-TRUNCATE shape;
-SET FOREIGN_KEY_CHECKS = 1;
-INSERT INTO shape (name, description)
-VALUES ("Cone", "A cone extends in a direction you choose from its point of origin. A cone's width at a given point is equal to that point's distance from the point of origin.\n\nA cone's point of origin is not included in the cones area of effect, unless you decide otherwise."),
-("Cube", "You select a cube's point of origin, which lies anywhere on a face of the cubic effect. The cube's size is expressed as the length of each side.\n\nA cube's point of origin is not included in the cube's area effect, unless you decide otherwise."),
-("Cylinder", "A cylinder's point of origin is the center of a circle of a particular radius, as given in the spells description. The circle must be either on the ground, or at the height of the spell effect. The energy in a cylinder expands in straight lines from the point of origin to the perimeter of the circle, forming the base of the cylinder. The spell's effect then shoots up from the base or down from the top, to a distance equal to the height of the cylinder.\n\nA cylinder's point of origin is included in the cylinder's area of effect."),
-("Line", "A line extends from it's point of origin in a straight path up to its length and covers an area definde by its width.\n\nA line's point of origin is not included in the line's area of effect, unless you decide otherwise."),
-("Sphere", "You select a sphere's point of origin, and the sphere extends outward from that point. The sphere's size is expressed as a radius in feet that extends from the point.\n\nA sphere's point of origin is included in the sphere's area of effect.");
-
-
 -- Make certain the material table is not polluted with old data.
 SET FOREIGN_KEY_CHECKS = 0;
 TRUNCATE material;
@@ -128,6 +116,7 @@ VALUES ((SELECT spell.id FROM spell WHERE spell.name = "Acid Splash"), (SELECT s
 ((SELECT spell.id FROM spell WHERE spell.name = "Animal Shapes"), (SELECT school.id FROM school WHERE school.name = "Transmutation")),
 ((SELECT spell.id FROM spell WHERE spell.name = "Animate Dead"), (SELECT school.id FROM school WHERE school.name = "Necromancy"));
 
+
 -- Make certain the duration_spell_time_unit table is not polluted with old data.
 SET FOREIGN_KEY_CHECKS = 0;
 TRUNCATE duration_spell_time_unit;
@@ -141,11 +130,6 @@ VALUES ((SELECT spell.id FROM spell WHERE spell.name = "Acid Splash"), (SELECT t
 ((SELECT spell.id FROM spell WHERE spell.name = "Animal Messenger"), (SELECT time_unit.id FROM time_unit WHERE time_unit.name = "Minute"), 24 * 60, NULL),
 ((SELECT spell.id FROM spell WHERE spell.name = "Animal Shapes"), (SELECT time_unit.id FROM time_unit WHERE time_unit.name = "Minute"), 24 * 60, NULL),
 ((SELECT spell.id FROM spell WHERE spell.name = "Animate Dead"), (SELECT time_unit.id FROM time_unit WHERE time_unit.name = "Minute"), 0, NULL);
-
--- Make certain the spell_shape table is not polluted with old data.
-SET FOREIGN_KEY_CHECKS = 0;
-TRUNCATE spell_shape;
-SET FOREIGN_KEY_CHECKS = 1;
 
 
 -- Make certain the spell_material table is not polluted with old data.

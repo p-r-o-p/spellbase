@@ -2,8 +2,11 @@ USE dnd_db;
 
 SELECT  spell.name AS "Name",
         spell.level AS "Level",
+        (SELECT school.name FROM school WHERE school.id = spell_school.school_id) AS "School",
         casting_spell_time_unit.quantity AS "Casting time",
         (SELECT time_unit.name FROM time_unit WHERE time_unit.id = casting_spell_time_unit.time_unit_id) AS "Casting time unit",
+        duration_spell_time_unit.quantity AS "Duration time",
+        (SELECT time_unit.name FROM time_unit WHERE time_unit.id = duration_spell_time_unit.time_unit_id) AS "Duration time unit",
         spell.reach AS "Range",
         (SELECT shape.name FROM shape WHERE shape.id = spell_shape.shape_id) AS "Shape type",
         spell_shape.size AS "Shape size",
@@ -26,16 +29,9 @@ FROM spell
     ON spell.id = casting_spell_time_unit.spell_id
   LEFT JOIN duration_spell_time_unit
     ON spell.id = duration_spell_time_unit.spell_id
-  LEFT JOIN time_unit
-    ON casting_spell_time_unit.time_unit_id = time_unit.id
   LEFT JOIN spell_shape
     ON spell.id = spell_shape.spell_id
-  LEFT JOIN shape
-    ON spell_shape.shape_id = shape.id
   LEFT JOIN spell_expansion
     ON spell.id = spell_expansion.spell_id
-  LEFT JOIN expansion
-    ON spell_expansion.expansion_id = expansion.id
-WHERE spell.name = "Animal Friendship"
 ORDER BY Name ASC
 \G

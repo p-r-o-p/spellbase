@@ -1,7 +1,7 @@
 <?php
 
 /**
- * A class for storing simple material info-
+ * A class for storing simple material info.
  */
 class MaterialSimple {
 

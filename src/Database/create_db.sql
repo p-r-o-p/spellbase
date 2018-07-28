@@ -10,12 +10,13 @@ CREATE TABLE spell (
   name VARCHAR(60) NOT NULL,
   level INTEGER(32) UNSIGNED NOT NULL,
   is_ritual BOOLEAN NOT NULL,
-  reach INTEGER(32) UNSIGNED NOT NULL,
+  reach INTEGER(32) NOT NULL,
   is_touch BOOLEAN NOT NULL,
   is_self BOOLEAN NOT NULL,
   is_concentration BOOLEAN NOT NULL,
   is_verbal BOOLEAN NOT NULL,
   is_somatic BOOlEAN NOT NULL,
+  materials TEXT,
   description TEXT NOT NULL,
   PRIMARY KEY (id)
 );
@@ -36,12 +37,12 @@ CREATE TABLE time_unit (
 );
 CREATE INDEX time_unit_name_index ON time_unit(name) USING BTREE;
 
-CREATE TABLE material (
+/*CREATE TABLE material (
   id INTEGER(32) UNSIGNED NOT NULL AUTO_INCREMENT,
   name VARCHAR(60) NOT NULL,
   PRIMARY KEY (id)
 );
-CREATE INDEX material_name_index ON material(name) USING BTREE;
+CREATE INDEX material_name_index ON material(name) USING BTREE;*/
 
 CREATE TABLE class (
   id INTEGER(32) UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -69,8 +70,8 @@ CREATE TABLE class_spell (
 CREATE TABLE casting_spell_time_unit (
   id INTEGER(32) UNSIGNED NOT NULL AUTO_INCREMENT,
   spell_id INTEGER(32) UNSIGNED NOT NULL,
-  time_unit_id INTEGER(32) UNSIGNED,
-  quantity INTEGER(32) UNSIGNED,
+  time_unit_id INTEGER(32) UNSIGNED NOT NULL,
+  quantity INTEGER(32) UNSIGNED NOT NULL,
   PRIMARY KEY (id),
   FOREIGN KEY (spell_id) REFERENCES spell(id),
   FOREIGN KEY (time_unit_id) REFERENCES time_unit(id)
@@ -81,7 +82,7 @@ CREATE TABLE duration_spell_time_unit (
   spell_id INTEGER(32) UNSIGNED NOT NULL,
   time_unit_id INTEGER(32) UNSIGNED,
   quantity INTEGER(32) UNSIGNED,
-  note TEXT,
+  note VARCHAR(60),
   PRIMARY KEY (id),
   FOREIGN KEY (spell_id) REFERENCES spell(id),
   FOREIGN KEY (time_unit_id) REFERENCES time_unit(id)
@@ -96,7 +97,7 @@ CREATE TABLE spell_school (
   FOREIGN KEY (school_id) REFERENCES school(id)
 );
 
-CREATE TABLE spell_material (
+/*CREATE TABLE spell_material (
   id INTEGER(32) UNSIGNED NOT NULL AUTO_INCREMENT,
   spell_id INTEGER(32) UNSIGNED NOT NULL,
   material_id INTEGER(32) UNSIGNED NOT NULL,
@@ -104,7 +105,7 @@ CREATE TABLE spell_material (
   PRIMARY KEY (id),
   FOREIGN KEY (spell_id) REFERENCES spell(id),
   FOREIGN KEY (material_id) REFERENCES material(id)
-);
+);*/
 
 CREATE TABLE spell_expansion (
   id INTEGER(32) UNSIGNED NOT NULL AUTO_INCREMENT,

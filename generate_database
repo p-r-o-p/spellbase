@@ -1,5 +1,5 @@
 #!/usr/bin/php
 <?php
-require_once __DIR__ . "/src/Database/DBHandler.php";
+require_once __DIR__ . "/src/DBHandler.php";
 
 DBHandler::generate();

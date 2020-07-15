@@ -1,1 +1,3 @@
-dbInfo.json
+.idea
+*.env
+db_info.json

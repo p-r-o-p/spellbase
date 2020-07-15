@@ -1,0 +1,36 @@
+version: "3.8"
+services:
+  apache-php:
+    container_name: 'spellbase_apache_php'
+    build:
+      context: 'apache-php'
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    ports:
+      - 80:80
+      - 443:443
+    restart: always
+    volumes:
+      - .:/app
+      - ./src:/var/www/html
+    links:
+      - 'mariadb'
+  mariadb:
+    container_name: 'spellbase_mariadb'
+    image: mariadb:10.5.4
+    environment:
+      TZ: 'europe/copenhagen'
+      MYSQL_ALLOW_EMPTY_PASSWORD: "no"
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+    restart: always
+    tty: true
+    volumes:
+      - mariadb:/var/lib/mysql
+
+volumes:
+  mariadb:

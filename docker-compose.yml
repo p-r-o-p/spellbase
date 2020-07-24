@@ -8,13 +8,14 @@ services:
       MYSQL_DATABASE: ${MYSQL_DATABASE}
       MYSQL_USER: ${MYSQL_USER}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_HOST: mariadb
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
     ports:
       - 80:80
       - 443:443
     restart: always
     volumes:
-      - .:/app
-      - ./src:/var/www/html
+      - .:/var/www/html
     links:
       - 'mariadb'
   mariadb:

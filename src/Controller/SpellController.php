@@ -1,6 +1,6 @@
 <?php
 
-namespace spellbase\Controller\SpellController;
+namespace spellbase\Controller;
 
 /**
  * Class SpellController
